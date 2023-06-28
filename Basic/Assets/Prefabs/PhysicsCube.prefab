@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 6454042620760468146}
   - component: {fileID: 6454042620760468147}
   - component: {fileID: 6454042620760468156}
-  - component: {fileID: -6825439092734327548}
   - component: {fileID: 6568404816097788836}
   m_Layer: 0
   m_Name: PhysicsCube
@@ -281,19 +280,6 @@ MonoBehaviour:
     Tag05: 0
     Tag06: 0
     Tag07: 0
---- !u!114 &-6825439092734327548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6454042620760468157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d77e6a1e9e2ee6a4f84cac09bdedbec2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LifeTime: 10
 --- !u!114 &6568404816097788836
 MonoBehaviour:
   m_ObjectHideFlags: 0

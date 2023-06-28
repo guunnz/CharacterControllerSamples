@@ -27,6 +27,7 @@ public partial class BasicPlayerInputsSystem : SystemBase
 
     protected override void OnUpdate()
     {
+       
         BasicInputActions.DefaultMapActions defaultMapActions = InputActions.DefaultMap;
         uint fixedTick = SystemAPI.GetSingleton<FixedTickSystem.Singleton>().Tick;
         

@@ -18,6 +18,9 @@ public class BasicPlayerAuthoring : MonoBehaviour
                 ControlledCamera = GetEntity(authoring.ControlledCamera, TransformUsageFlags.Dynamic),
             });
             AddComponent(entity, new BasicPlayerInputs());
+      
         }
     }
+
+   
 }

@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1692896102597148394}
   - component: {fileID: -8866371503406668822}
-  - component: {fileID: 6689285571920954877}
   - component: {fileID: 7542772330835976783}
+  - component: {fileID: 461696373329119498}
   m_Layer: 0
   m_Name: BasicCharacter
   m_TagString: Untagged
@@ -59,7 +59,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &6689285571920954877
+--- !u!114 &7542772330835976783
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -68,7 +68,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1692896102597148395}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c854a728d43c7cf47bec103607a449f9, type: 3}
+  m_Script: {fileID: 11500000, guid: d3a88336df575c34e80048c54a815367, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 2861637503494133753}
+--- !u!114 &461696373329119498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1692896102597148395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77fc5fff5c0e9014586c23c357e9eafe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   CharacterProperties:
@@ -102,7 +115,7 @@ MonoBehaviour:
     RotationSharpness: 25
     GroundMaxSpeed: 10
     GroundedMovementSharpness: 15
-    AirAcceleration: 20
+    AirAcceleration: 50
     AirMaxSpeed: 10
     AirDrag: 0
     JumpSpeed: 10
@@ -111,9 +124,9 @@ MonoBehaviour:
       y: -30
       z: -0
     PreventAirAccelerationAgainstUngroundedHits: 1
-    MaxJumpsInAir: 99
+    MaxJumpsInAir: 0
     StepAndSlopeHandling:
-      StepHandling: 1
+      StepHandling: 0
       MaxStepHeight: 0.5
       ExtraStepChecksDistance: 0.1
       CharacterWidthForStepGroundingCheck: 1
@@ -122,7 +135,7 @@ MonoBehaviour:
       MaxDownwardSlopeChangeAngle: 90
       ConstrainVelocityToGroundPlane: 1
     IgnoreCollisionsTag:
-      Tag00: 1
+      Tag00: 0
       Tag01: 0
       Tag02: 0
       Tag03: 0
@@ -132,7 +145,7 @@ MonoBehaviour:
       Tag07: 0
     IgnoreGroundingTag:
       Tag00: 0
-      Tag01: 1
+      Tag01: 0
       Tag02: 0
       Tag03: 0
       Tag04: 0
@@ -142,7 +155,7 @@ MonoBehaviour:
     ZeroMassAgainstCharacterTag:
       Tag00: 0
       Tag01: 0
-      Tag02: 1
+      Tag02: 0
       Tag03: 0
       Tag04: 0
       Tag05: 0
@@ -152,7 +165,7 @@ MonoBehaviour:
       Tag00: 0
       Tag01: 0
       Tag02: 0
-      Tag03: 1
+      Tag03: 0
       Tag04: 0
       Tag05: 0
       Tag06: 0
@@ -162,23 +175,10 @@ MonoBehaviour:
       Tag01: 0
       Tag02: 0
       Tag03: 0
-      Tag04: 1
+      Tag04: 0
       Tag05: 0
       Tag06: 0
       Tag07: 0
---- !u!114 &7542772330835976783
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1692896102597148395}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3a88336df575c34e80048c54a815367, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Target: {fileID: 2861637503494133753}
 --- !u!1 &1692896103431116738
 GameObject:
   m_ObjectHideFlags: 0
