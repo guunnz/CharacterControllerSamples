@@ -24,6 +24,7 @@ public class MainCharacterAuthoring : MonoBehaviour
         }
     }
 }
+
 public struct LePlayer : IComponentData
 {
         

@@ -14,6 +14,7 @@ public partial class GridSystem : SystemBase
 {
     private bool shouldUpdate = true;
     private bool hasBasicPlayer = false;
+    private bool playPosChanged = false;
 
     protected override void OnCreate()
     {
@@ -31,10 +32,12 @@ public partial class GridSystem : SystemBase
             Entities.WithoutBurst().ForEach((Entity entity, in LePlayer basicPlayer) => { hasBasicPlayer = true; })
                 .Run();
         }
-
+   
         if (!hasBasicPlayer)
             return;
 
+        var player = SystemAPI.GetSingletonEntity<LePlayer>();
+        
         EntityQuery cubeQuery =
             GetEntityQuery(ComponentType.ReadOnly<SpawnedCube>(), ComponentType.ReadOnly<LocalTransform>());
         int entityCount = cubeQuery.CalculateEntityCount();
@@ -48,6 +51,7 @@ public partial class GridSystem : SystemBase
 
         NativeArray<LocalTransform> cubeTransforms = cubeQuery.ToComponentDataArray<LocalTransform>(Allocator.TempJob);
         NativeArray<Entity> cubeEntities = cubeQuery.ToEntityArray(Allocator.TempJob);
+       
         
         Debug.Log(cubeTransforms.Length);
         //
@@ -64,11 +68,16 @@ public partial class GridSystem : SystemBase
         var ecb = new EntityCommandBuffer(Allocator.Temp);
         var ecb2 = SystemAPI.GetSingleton<EndSimulationEntityCommandBufferSystem.Singleton>();
 
+        if (!playPosChanged)
+        {
+            ecb.SetComponent(player, new LocalTransform(){Rotation = quaternion.identity, Scale = 1, Position = new float3(0,0,1000)});
+            playPosChanged = true;
+        }
 
         var cube = SystemAPI.GetSingletonEntity<CubeTag>();
 
-        var player = SystemAPI.GetSingletonEntity<LePlayer>();
 
+        
         var playerAspectPost = SystemAPI.GetAspect<GetPositionAspect>(player);
 
         var cubeAspect = SystemAPI.GetAspect<CubeAspect>(cube);
@@ -113,62 +122,6 @@ public partial class GridSystem : SystemBase
             width = width,
             cubeTransforms = blobAssetTransform
         }.ScheduleParallel();
-
-        // if (canSpawnFirst)
-        // {
-        //     var playerCube = ecb.Instantiate(cubeAspect.GetCubePrefab());
-        //     LocalTransform playerCubeTransform = new LocalTransform
-        //         { Position = playerPosition, Scale = 1, Rotation = quaternion.identity };
-        //     ecb.SetComponent(playerCube, playerCubeTransform);
-        //     ecb.AddComponent(playerCube, new SpawnedCube());
-        // }
-
-        // for (float radius = minRadius; radius <= maxRadius; radius += width)
-        // {
-        //     // Calculate the circumference at the current radius
-        //     float circumference = 2.0f * math.PI * radius;
-        //
-        //     // Calculate the number of cubes needed for the current radius
-        //     int numCubes = Mathf.CeilToInt(circumference / width);
-        //
-        //     for (int i = 0; i < numCubes; i++)
-        //     {
-        //         float angleDegrees = 360.0f / numCubes * i;
-        //         float angleRadians = math.radians(angleDegrees);
-        //
-        //         // Calculate the position of the cube
-        //         float3 cubePosition = new float3(
-        //             playerPosition.x + radius * math.cos(angleRadians),
-        //             -5,
-        //             playerPosition.z + radius * math.sin(angleRadians)
-        //         );
-        //
-        //         // Skip spawning a cube at the player's position
-        //         if (math.distance(cubePosition, playerPosition) < 0.01f)
-        //             continue;
-        //
-        //         bool canSpawn = true;
-        //         for (int j = 0; j < cubeTransforms.Length; j++)
-        //         {
-        //             if (math.distance(cubePosition, cubeTransforms[j].Position) < 1)
-        //             {
-        //                 canSpawn = false;
-        //             }
-        //         }
-        //
-        //         if (canSpawn)
-        //         {
-        //             // Instantiate the cube
-        //             var newCube = ecb.Instantiate(cubeAspect.GetCubePrefab());
-        //             LocalTransform newCubeTransform = new LocalTransform
-        //                 { Position = cubePosition, Scale = 1, Rotation = quaternion.identity };
-        //
-        //             // Set the cube's position
-        //             ecb.SetComponent(newCube, newCubeTransform);
-        //             ecb.AddComponent(newCube, new SpawnedCube());
-        //         }
-        //     }
-        // }
 
         ecb.Playback(EntityManager);
         cubeTransforms.Dispose();
